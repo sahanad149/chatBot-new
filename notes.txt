@@ -1,0 +1,9 @@
+#OpenAI ChatBot
+
+A fully secured AI software as a service project using openAI and MERN stack.
+
+Fully responsive web design and chatbot. UI is similar to ChatGPT.
+
+Cookies will be stored in order to keep the user logged in for 7 days.
+
+NodeJS and ExpressJS are used in the backend for creating rest APIs and MongoDB will be used for efficient data storage. Vite is used on the frontend for Dynamic and reliable application. For authentication and authorization, password encryption is used. JWT and it's json web tokens is used. HTTP only cookies is used to access the cookies only on the server side(backend) and connot be accessed by JS. Validations and multiple middleware checks are maintained to ensure security. MaterialUI is used for designing and UI. ContextAPI in ReactJS is used to provide authentication. OpenAI integration will be used for chat completion along with NodeJS.
