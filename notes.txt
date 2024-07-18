@@ -17,3 +17,68 @@ NodeJS and ExpressJS are used in the backend for creating rest APIs and MongoDB 
 *** Building the backend ***
 1) Setup node and express using typescript.
 2) Install all the necessary dependencies.
+3) Register routes.
+4) Integrate MongoDB database connection.
+5) Create Register/Login on OpenAI Portal, Get API keys directly.
+6) Build a secure authentication with Tokens and HTTP-only signed cookies.
+
+
+
+-> Types of requests: (These are also middlewares)
+    GET - fetching data from backend/database.
+    PUT - update/modify/mutate data.
+    POST - sends data.
+    DELETE - to delete data.
+
+    => these callback functions have 3 parameters - request, response and next. Request is made by the client/user. Response is the answer to the request made. Next is used to move on to the next available middleware.
+
+Postman is an API testing platform.
+
+{
+    // Creating routes and middlewares.
+app.get("/hello",(req, res, next) => {
+  return res.send("Hello");
+})
+
+app.use(express.json());
+
+app.post("/hello",(req, res, next) => {
+  console.log(req.body.name);
+  // json data sent in body
+  return res.send("Hello");
+})
+// send some data along with the request.
+
+}
+
+"/hello" used in the above requsts are static routes. To access a single particular record, add the user id# to the url. ("/user/:id")
+
+
+** Adding folders:
+1) models - all models.
+2) routes - creating the routing points.
+3) controllers - hender functions; contains functions to control the incoming API requests.
+4) config - all configurations.
+5) utils - utility functions.
+6) db
+
+
+** MongoDB **
+Login -> create new project.
+Using the cloud version instead of the downloaded version.
+Goto network access and set it to access from anywhere.(any IP address).
+Goto database -> connect -> Drivers -> copyurl -> replace the MongoDB url in .env file.
+Using mongoose for MongoDB validation, casting and business logic. Open-source and easy-to-use tool.
+
+** OpenAI Integration **
+Login -> API keys -> Create a new key (name it and hit create).
+Copy the secret key and paste it in .env file.
+
+
+** Building CPI End-points **
+-> Install morgan for retriving the logs and statuses of the code.
+-> Create middlewares for the application. API structure - localhost 5000 or domain/api/version
+-> Create a route handler file inside routes folder.
+-> After the api/version request is made, the end-point is handled by appRouter (exported from the route handler file created).
+-> Create route structure. [Example: user route, chats route, etc]. In simple words, it is just paving a path for the application to perform dynamically according to user actions.
+-> Inside these routes, define all the http verbs that can be accepted. In order to do so, create controller files and actions into it.
