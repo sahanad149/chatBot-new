@@ -34,6 +34,9 @@ NodeJS and ExpressJS are used in the backend for creating rest APIs and MongoDB 
 
 Postman is an API testing platform.
 
+Middleware: The function performed between the request and response.
+-> express-validator: A set of express.js middlewares that contains a large collection of validators.
+
 {
     // Creating routes and middlewares.
 app.get("/hello",(req, res, next) => {
@@ -82,3 +85,15 @@ Copy the secret key and paste it in .env file.
 -> After the api/version request is made, the end-point is handled by appRouter (exported from the route handler file created).
 -> Create route structure. [Example: user route, chats route, etc]. In simple words, it is just paving a path for the application to perform dynamically according to user actions.
 -> Inside these routes, define all the http verbs that can be accepted. In order to do so, create controller files and actions into it.
+
+# Database models (schemas):
+-> user - name, email, password, chats: Chat[]
+-> The mongoose package has a .find() function that can help with searching the query 'User'.
+
+=> Once the client/user makes a request(signup), the data is first run through a middleware allocated to verify all the data entered by the user. If the data entered is incorrect or not in the right format, then it is sent back to the client to rectify and send again. If the data is according to the requirements, then it is proceeded to the next middleware to store the data. 
+
+
+# Basic Structure: (User Signin and Login)
+validators - contain checks
+userRoutes - contains the order in which the middleware functions are to be executed.
+userControllers - contains all the necessary middleware functions.
