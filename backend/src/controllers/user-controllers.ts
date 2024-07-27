@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../models/User.js";
 import { hash, compare } from "bcrypt";      //bcrpyt is used on pwds to encrypt them.
+import { createToken } from "../utils/token-manager.js";
+import { COOKIE_NAME } from "../utils/constants.js";
 
 export const getAllUsers = async (req:Request, res:Response, next:NextFunction) => {
     // fetch all users directly from the database.
@@ -25,6 +27,21 @@ export const userSignup = async (req:Request, res:Response, next:NextFunction) =
         const hashedPwd = await hash(password, 10);
         const user = new User({name, email, password: hashedPwd});
         await user.save();
+
+        // create token and store cookie
+        const token = createToken(user._id.toString(), user.email, "7d");
+
+        const expires = new Date();
+        expires.setDate(expires.getDate() + 7);
+
+        res.cookie(COOKIE_NAME, token, {
+            path: "/",
+            domain: "localhost",
+            expires,
+            httpOnly: true,
+            signed: true
+        });
+        
         return res.status(201).json({message:"OK", id: user._id.toString() });      //201 - status id to create a new user.
     } catch (error) {
         console.log(error);
@@ -48,6 +65,29 @@ export const userLogin = async (req:Request, res:Response, next:NextFunction) =>
         if(!isPasswordCorrect) {
             return res.status(403).send("Incorrect Password");      //403 - Forbidden
         }
+
+        // To remove the existing cookies of the user and assign new cookies for a new login of the user
+        res.clearCookie(COOKIE_NAME, {
+            path: "/",
+            domain: "localhost",
+            httpOnly: true,
+            signed: true
+        });
+
+        const token = createToken(user._id.toString(), user.email, "7d");
+
+        const expires = new Date();
+        expires.setDate(expires.getDate() + 7);
+
+        res.cookie(COOKIE_NAME, token, {
+            path: "/",
+            domain: "localhost",
+            expires,
+            httpOnly: true,
+            signed: true
+        });
+        // The cookie is stored in the root directory of the cookie.
+        // Change the domain after deployment
 
         return res.status(200).json({message: "OK", id: user._id.toString()});
 

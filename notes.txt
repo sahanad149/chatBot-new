@@ -14,7 +14,7 @@ NodeJS and ExpressJS are used in the backend for creating rest APIs and MongoDB 
 => ReactJS - frontend library. Creates dynamic and interactive UIs.
 => NodeJS - server side; executes JS, handles the requests and manages the backend operations.
 
-*** Building the backend ***
+##*** Building the backend ***##
 1) Setup node and express using typescript.
 2) Install all the necessary dependencies.
 3) Register routes.
@@ -97,3 +97,26 @@ Copy the secret key and paste it in .env file.
 validators - contain checks
 userRoutes - contains the order in which the middleware functions are to be executed.
 userControllers - contains all the necessary middleware functions.
+
+{
+  # User Authentication: user needs to verify their identity.
+
+  # Generate a token after user auth is successful. This step ensures that the user has successfully logged in and is entitled to access the resources(chats) of the organization(openAI).
+
+  # JWT - JSON Web Token is a library used to send back the token. Encrypts the payload into a string that contains all the permissions nand user auth info.
+
+  # HTTP Only cookies - a web cookie with a special security attribute -> prevents XSS attacks -> cannot access the cookies through JS.
+
+}
+
+Thus, the overall Authentication process is as follows:
+1] User authenticates
+2] The model sets a HTTP only signed cookie with JWT token.
+3] User has a token.
+4] User sends back the cookie with a request to access the resources/chats.
+5] The browser checks whether the cookie matches as well as if the token is valid.
+6] The browser then processes or aborts the request accordingly.
+
+token-manager is used to create the token. It tkaes the payload(user id and email) and hashes it with the jwt secret to generate a token and also assigns an expiry time period for the same. 
+
+This can be called once the password is validated to be correct in userController. Later the token has to be sent in the form of a cookie. The cookie-parser is used to send the cookies from backend to the frontend.
