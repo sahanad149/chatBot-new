@@ -120,3 +120,15 @@ Thus, the overall Authentication process is as follows:
 token-manager is used to create the token. It tkaes the payload(user id and email) and hashes it with the jwt secret to generate a token and also assigns an expiry time period for the same. 
 
 This can be called once the password is validated to be correct in userController. Later the token has to be sent in the form of a cookie. The cookie-parser is used to send the cookies from backend to the frontend.
+
+
+
+
+###Frontend Development ###
+-> Install node and vite 
+-> Get the font to be used and import it on the index.css file.
+-> To style the website, MaterialUI is used.
+npm install @mui/material @emotion/react @emotion/styled
+-> Install the react icons: npm install react-icons --save
+-> For routing, install the react router. And, add react toaster for alert kind of notifications on the website.
+-> Create different pages and call them in the main section of App.tsx
