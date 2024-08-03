@@ -14,7 +14,7 @@ NodeJS and ExpressJS are used in the backend for creating rest APIs and MongoDB 
 => ReactJS - frontend library. Creates dynamic and interactive UIs.
 => NodeJS - server side; executes JS, handles the requests and manages the backend operations.
 
-##*** Building the backend ***##
+***## Building the backend ##***
 1) Setup node and express using typescript.
 2) Install all the necessary dependencies.
 3) Register routes.
